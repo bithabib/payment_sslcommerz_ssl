@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Part of Odoo. See LICENSE file for full copyright and licensing details. -->
+<odoo noupdate="1">
+
+    <record id="payment.payment_provider_sslcommerz" model="payment.provider">
+        <field name="code">sslcommerz</field>
+        <field name="redirect_form_view_id" ref="redirect_form"/>
+    </record>
+
+</odoo>

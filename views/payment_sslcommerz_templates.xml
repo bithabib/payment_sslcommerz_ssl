@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Part of Odoo. See LICENSE file for full copyright and licensing details. -->
+<odoo>
+
+    <!-- SSLCommerz redirect form template.
+         The payment is initiated server-side and we redirect to the gateway URL. -->
+    <template id="redirect_form">
+        <form t-att-action="api_url" method="get">
+            <!-- SSLCommerz uses server-side session initialization.
+                 The api_url already contains the session key for the payment. -->
+        </form>
+    </template>
+
+</odoo>
