@@ -11,13 +11,14 @@ class SSLCommerz:
     sslc_store_id: str
     sslc_store_pass: str
     sslc_mode_name: str
-    integration_data: Dict[str, str] = {}
+    integration_data: dict[str, str] = {}
 
     def __init__(self, sslc_is_sandbox=True, sslc_store_id='', sslc_store_pass='') -> None:
         self.sslc_mode_name = self.set_sslcommerz_mode(sslc_is_sandbox)
         self.sslc_is_sandbox = sslc_is_sandbox
         self.sslc_store_id = sslc_store_id
         self.sslc_store_pass = sslc_store_pass
+        self.integration_data = {}  # Initialize per instance
         self.sslc_session_api = 'https://' + \
             self.sslc_mode_name + '.' + const.SSLCZ_SESSION_API
         self.sslc_validation_api = 'https://' + \
@@ -41,7 +42,7 @@ class SSLCSession(SSLCommerz):
         self.integration_data['cancel_url'] = cancel_url
         self.integration_data['ipn_url'] = ipn_url
 
-    def set_product_integration(self, tran_id: str, total_amount: Decimal, currency: str, product_category: str, product_name: str, num_of_item: int, shipping_method: str, product_profile: str = 'None') -> None:
+    def set_product_integration(self, tran_id: str, total_amount, currency: str, product_category: str, product_name: str, num_of_item: int, shipping_method: str, product_profile: str = 'None') -> None:
         self.integration_data['store_id'] = self.sslc_store_id
         self.integration_data['store_passwd'] = self.sslc_store_pass
         self.integration_data['tran_id'] = tran_id
@@ -80,22 +81,26 @@ class SSLCSession(SSLCommerz):
         post_url = self.sslc_session_api
         post_data = self.integration_data
         response_sslc = requests.post(post_url, post_data)
-        response_data: Dict[str, str] = {}
+        response_data = {}
 
         if response_sslc.status_code == 200:
-            response_json = json.loads(response_sslc.text)
-            if response_json['status'] == 'FAILED':
+            response_json = response_sslc.json()
+            if response_json.get('status') == 'FAILED':
                 response_data['status'] = response_json['status']
-                response_data['failedreason'] = response_json['failedreason']
+                response_data['failedreason'] = response_json.get('failedreason', 'Unknown error')
                 return response_data
-            response_data['status'] = response_json['status']
-            response_data['sessionkey'] = response_json['sessionkey']
-            response_data['GatewayPageURL'] = response_json['GatewayPageURL']
+            response_data['status'] = response_json.get('status')
+            response_data['sessionkey'] = response_json.get('sessionkey')
+            response_data['GatewayPageURL'] = response_json.get('GatewayPageURL')
             return response_data
         else:
-            response_json = json.loads(response_sslc.text)
-            response_data['status'] = response_json['status']
-            response_data['failedreason'] = response_json['failedreason']
+            try:
+                response_json = response_sslc.json()
+                response_data['status'] = response_json.get('status', 'FAILED')
+                response_data['failedreason'] = response_json.get('failedreason', 'Unknown error')
+            except Exception:
+                response_data['status'] = 'FAILED'
+                response_data['failedreason'] = f'HTTP Error: {response_sslc.status_code}'
             return response_data
 
 
@@ -104,8 +109,8 @@ class Validation(SSLCommerz):
         super().__init__(sslc_is_sandbox, sslc_store_id, sslc_store_pass)
 
     def validate_transaction(self, validation_id):
-        query_params: Dict[str, str] = {}
-        response_data: Dict[str, str] = {}
+        query_params = {}
+        response_data = {}
         query_params['val_id'] = validation_id
         query_params['store_id'] = self.sslc_store_id
         query_params['store_passwd'] = self.sslc_store_pass
@@ -118,11 +123,11 @@ class Validation(SSLCommerz):
 
         if validation_response.status_code == 200:
             validation_json = validation_response.json()
-            if validation_json['status'] == 'VALIDATED':
+            if validation_json.get('status') == 'VALIDATED':
                 response_data['status'] = 'VALIDATED'
                 response_data['data'] = validation_json
             else:
-                response_data['status'] = validation_json['status']
+                response_data['status'] = validation_json.get('status', 'FAILED')
                 response_data['data'] = validation_json
         else:
             response_data['status'] = 'FAILED'
@@ -132,7 +137,7 @@ class Validation(SSLCommerz):
 
     def validate_ipn_hash(self, ipn_data):
         if self.key_check(ipn_data, 'verify_key') and self.key_check(ipn_data, 'verify_sign'):
-            check_params: Dict[str, str] = {}
+            check_params = {}
             verify_key = ipn_data['verify_key'].split(',')
 
             for key in verify_key:
@@ -152,13 +157,11 @@ class Validation(SSLCommerz):
 
             if sign_string_hash == ipn_data['verify_sign']:
                 return True
-            return False
+        return False
 
     @staticmethod
     def key_check(data_dict, check_key):
-        if check_key in data_dict.keys():
-            return True
-        return False
+        return check_key in data_dict
 
     @staticmethod
     def sort_keys(data_dict):

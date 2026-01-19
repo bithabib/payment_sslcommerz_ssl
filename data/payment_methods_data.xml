@@ -2,7 +2,7 @@
 <!-- Part of Odoo. See LICENSE file for full copyright and licensing details. -->
 <odoo noupdate="1">
 
-    <record id="payment.payment_method_sslcommerz" model="payment.method">
+    <record id="payment_method_sslcommerz" model="payment.method">
         <field name="code">sslcommerz</field>
         <field name="name">SSLCommerz</field>
         <field name="sequence">1000</field>
