@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Part of Odoo. See LICENSE file for full copyright and licensing details. -->
+<odoo>
+
+    <!-- Payment Banner Snippet for Website Editor -->
+    <template id="s_sslcommerz_banner" name="SSLCommerz Payment Banner">
+        <section class="s_sslcommerz_banner pt-3 pb-3 text-center">
+            <div class="container">
+                <p class="text-muted small mb-2">Secure Payment By</p>
+                <img src="/website_sslcommerz_compliance/static/description/sslcommerz_banner.png"
+                     alt="SSLCommerz - We Accept Visa, Mastercard, bKash, Nagad, Rocket and more"
+                     class="img-fluid"
+                     style="max-height: 60px;"/>
+            </div>
+        </section>
+    </template>
+
+    <!-- Register the snippet in the website builder -->
+    <template id="sslcommerz_banner_snippet_options" inherit_id="website.snippets">
+        <xpath expr="//snippets[@id='snippet_structure']" position="inside">
+            <t t-snippet="website_sslcommerz_compliance.s_sslcommerz_banner"
+               t-thumbnail="/website_sslcommerz_compliance/static/description/icon.png"/>
+        </xpath>
+    </template>
+
+</odoo>

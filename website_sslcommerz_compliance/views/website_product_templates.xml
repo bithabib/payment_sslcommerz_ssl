@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Part of Odoo. See LICENSE file for full copyright and licensing details. -->
+<odoo>
+
+    <!-- Show stock quantity on product page - inherits from website_sale_stock -->
+    <template id="product_stock_quantity" inherit_id="website_sale_stock.website_sale_stock_product" name="Stock Quantity Display">
+        <xpath expr="//div[hasclass('availability_messages')]" position="inside">
+            <t t-if="request.website.compliance_show_stock_quantity">
+                <t t-set="product_variant" t-value="product_variant or product.product_variant_id"/>
+                <div t-if="product_variant.virtual_available > 0" class="text-muted small mt-2">
+                    <i class="fa fa-check-circle text-success me-1"/>
+                    <span class="text-success"><t t-esc="int(product_variant.virtual_available)"/> items in stock</span>
+                </div>
+                <div t-elif="product_variant.virtual_available &lt;= 0" class="text-muted small mt-2">
+                    <i class="fa fa-exclamation-triangle text-warning me-1"/>
+                    <span class="text-warning">Currently out of stock</span>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+    <!-- Add stock quantity badge on product cards in shop listing -->
+    <template id="products_item_stock_badge" inherit_id="website_sale.products_item" name="Product Card Stock Badge">
+        <xpath expr="//form//input[@name='csrf_token']" position="after">
+            <t t-if="request.website.compliance_show_stock_quantity">
+                <t t-set="is_out_of_stock" t-value="product._is_sold_out()"/>
+                <span t-if="is_out_of_stock"
+                      class="badge bg-danger position-absolute o_not_editable"
+                      style="top: 10px; left: 10px; z-index: 10;">
+                    Out of Stock
+                </span>
+            </t>
+        </xpath>
+    </template>
+
+</odoo>

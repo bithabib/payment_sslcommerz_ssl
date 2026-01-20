@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Part of Odoo. See LICENSE file for full copyright and licensing details. -->
+<odoo>
+
+    <record id="res_config_settings_view_form_compliance" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.compliance</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="website.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//app[@name='website']//block[@id='website_settings']" position="after">
+                <block title="SSLCommerz Compliance" id="sslcommerz_compliance_settings">
+                    <setting id="compliance_company_settings" string="Company Information" help="Configure your company details for compliance">
+                        <div class="content-group">
+                            <div class="row mt16">
+                                <label class="col-lg-3 o_light_label" string="Company Name" for="compliance_company_name"/>
+                                <field name="compliance_company_name"/>
+                            </div>
+                            <div class="row mt8">
+                                <label class="col-lg-3 o_light_label" string="Trade License No." for="compliance_trade_license"/>
+                                <field name="compliance_trade_license"/>
+                            </div>
+                            <div class="row mt8">
+                                <label class="col-lg-3 o_light_label" string="TIN Number" for="compliance_tin_number"/>
+                                <field name="compliance_tin_number"/>
+                            </div>
+                            <div class="row mt8">
+                                <label class="col-lg-3 o_light_label" string="Registered Address" for="compliance_registered_address"/>
+                                <field name="compliance_registered_address"/>
+                            </div>
+                        </div>
+                    </setting>
+                    <setting id="compliance_contact_settings" string="Contact Information" help="Configure contact details">
+                        <div class="content-group">
+                            <div class="row mt16">
+                                <label class="col-lg-3 o_light_label" string="Contact Email" for="compliance_contact_email"/>
+                                <field name="compliance_contact_email"/>
+                            </div>
+                            <div class="row mt8">
+                                <label class="col-lg-3 o_light_label" string="Contact Phone" for="compliance_contact_phone"/>
+                                <field name="compliance_contact_phone"/>
+                            </div>
+                        </div>
+                    </setting>
+                    <setting id="compliance_delivery_settings" string="Delivery Information" help="Configure delivery times">
+                        <div class="content-group">
+                            <div class="row mt16">
+                                <label class="col-lg-3 o_light_label" string="Inside Dhaka" for="compliance_delivery_dhaka"/>
+                                <field name="compliance_delivery_dhaka" placeholder="e.g., 3-5 working days"/>
+                            </div>
+                            <div class="row mt8">
+                                <label class="col-lg-3 o_light_label" string="Outside Dhaka" for="compliance_delivery_outside"/>
+                                <field name="compliance_delivery_outside" placeholder="e.g., 7-10 working days"/>
+                            </div>
+                        </div>
+                    </setting>
+                    <setting id="compliance_refund_settings" string="Refund Timeline" help="Configure refund processing time">
+                        <div class="content-group">
+                            <div class="row mt16">
+                                <label class="col-lg-3 o_light_label" string="Refund Timeline" for="compliance_refund_timeline"/>
+                                <field name="compliance_refund_timeline" placeholder="e.g., 7-10 working days"/>
+                            </div>
+                        </div>
+                    </setting>
+                    <setting id="compliance_display_trade_license" help="Show Trade License and TIN in website footer">
+                        <field name="compliance_show_trade_license"/>
+                    </setting>
+                    <setting id="compliance_display_stock" help="Show stock quantity on product pages">
+                        <field name="compliance_show_stock_quantity"/>
+                    </setting>
+                    <setting id="compliance_terms_agreement" help="Require customers to agree to Terms and Conditions at checkout">
+                        <field name="compliance_require_terms_agreement"/>
+                    </setting>
+                    <setting id="compliance_payment_banner" help="Show SSLCommerz payment methods banner in footer">
+                        <field name="compliance_show_payment_banner"/>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

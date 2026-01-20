@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Part of Odoo. See LICENSE file for full copyright and licensing details. -->
+<odoo>
+
+    <!-- Override the default footer to include compliance information -->
+    <template id="compliance_footer" inherit_id="website.footer_custom" name="SSLCommerz Compliance Footer">
+        <!-- Replace the entire footer content with our unified version -->
+        <xpath expr="//div[@id='footer']" position="replace">
+            <div id="footer" class="oe_structure oe_structure_solo border text-break" t-ignore="true" t-if="not no_footer" style="--box-border-left-width: 0px; --box-border-right-width: 0px;">
+                <section class="s_text_block pt40 pb16" data-snippet="s_text_block" data-name="Container">
+                    <div class="container">
+                        <div class="row">
+                            <!-- Policies Column -->
+                            <div class="col-lg-2 pt24 pb24">
+                                <h5>Policies</h5>
+                                <ul class="list-unstyled">
+                                    <li><a href="/terms-and-conditions">Terms &amp; Conditions</a></li>
+                                    <li><a href="/return-refund-policy">Return &amp; Refund Policy</a></li>
+                                    <li><a href="/privacy-policy">Privacy Policy</a></li>
+                                </ul>
+                            </div>
+                            <!-- Company Column -->
+                            <div class="col-lg-2 pt24 pb24">
+                                <h5>Company</h5>
+                                <ul class="list-unstyled">
+                                    <li><a href="/about-us">About Us</a></li>
+                                    <li><a href="/contactus">Contact Us</a></li>
+                                    <li><a href="/delivery-information">Delivery Information</a></li>
+                                    <li><a href="/shop">Products</a></li>
+                                </ul>
+                            </div>
+                            <!-- Business Info Column -->
+                            <div class="col-lg-4 pt24 pb24">
+                                <h5>Business Info</h5>
+                                <ul class="list-unstyled text-muted small">
+                                    <li t-if="request.website.compliance_trade_license and request.website.compliance_show_trade_license" class="mb-1">
+                                        <i class="fa fa-id-card me-1"/>Trade License: <t t-esc="request.website.compliance_trade_license"/>
+                                    </li>
+                                    <li t-if="request.website.compliance_tin_number and request.website.compliance_show_trade_license" class="mb-1">
+                                        <i class="fa fa-file-text me-1"/>TIN: <t t-esc="request.website.compliance_tin_number"/>
+                                    </li>
+                                    <li t-if="request.website.compliance_registered_address" class="mb-1">
+                                        <i class="fa fa-map-marker me-1"/><t t-esc="request.website.compliance_registered_address"/>
+                                    </li>
+                                    <li t-if="request.website.compliance_contact_email" class="mb-1">
+                                        <i class="fa fa-envelope me-1"/><t t-esc="request.website.compliance_contact_email"/>
+                                    </li>
+                                    <li t-if="request.website.compliance_contact_phone" class="mb-1">
+                                        <i class="fa fa-phone me-1"/><t t-esc="request.website.compliance_contact_phone"/>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- Delivery Info Column -->
+                            <div class="col-lg-2 pt24 pb24">
+                                <h5>Delivery</h5>
+                                <ul class="list-unstyled text-muted small">
+                                    <li class="mb-2">
+                                        <i class="fa fa-bolt me-1 text-success"/>
+                                        <strong>Instant Access</strong><br/>
+                                        Get product access immediately after purchase
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fa fa-headphones me-1"/>
+                                        <strong>24h Support</strong><br/>
+                                        Issues resolved within 24 hours
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- Social Media Column -->
+                            <div class="col-lg-2 pt24 pb24">
+                                <h5>Connect</h5>
+                                <div class="s_social_media o_not_editable" data-snippet="s_social_media">
+                                    <a href="/website/social/facebook" class="s_social_media_facebook" target="_blank">
+                                        <i class="fa fa-facebook rounded-circle shadow-sm"/>
+                                    </a>
+                                    <a href="/website/social/twitter" class="s_social_media_twitter" target="_blank">
+                                        <i class="fa fa-twitter rounded-circle shadow-sm"/>
+                                    </a>
+                                    <a href="/website/social/linkedin" class="s_social_media_linkedin" target="_blank">
+                                        <i class="fa fa-linkedin rounded-circle shadow-sm"/>
+                                    </a>
+                                    <a href="/website/social/instagram" class="s_social_media_instagram" target="_blank">
+                                        <i class="fa fa-instagram rounded-circle shadow-sm"/>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Payment Banner Section - Full Width -->
+                <section class="s_text_block py-3 bg-white border-top" t-if="request.website.compliance_show_payment_banner" data-snippet="s_text_block" data-name="Payment Banner">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <p class="text-muted small mb-2">We Accept</p>
+                                <img src="https://securepay.sslcommerz.com/public/image/SSLCommerz-Pay-With-logo-All-Size-01.png"
+                                     alt="SSLCommerz - Pay With Visa, Mastercard, bKash, Nagad, Rocket and more"
+                                     class="img-fluid w-100"
+                                     style="max-height: 80px; object-fit: contain;"/>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

@@ -1,0 +1,92 @@
+// SSLCommerz Compliance Styles
+
+// Footer compliance section
+.compliance-footer-section {
+    background-color: rgba(0, 0, 0, 0.02);
+
+    h6 {
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+    }
+
+    ul li a {
+        text-decoration: none;
+        transition: color 0.2s ease;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .payment-banner {
+        opacity: 0.9;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+
+// Stock badges on product cards
+.stock-badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 4px 8px;
+}
+
+.stock-out-badge {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+// Terms agreement at checkout
+.compliance-terms-agreement {
+    border-color: #dee2e6;
+    background-color: #f8f9fa;
+
+    .form-check-input {
+        cursor: pointer;
+
+        &:checked {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+    }
+
+    .form-check-label {
+        cursor: pointer;
+        font-size: 0.95rem;
+
+        a {
+            font-weight: 500;
+        }
+    }
+}
+
+// Payment banner snippet
+.s_sslcommerz_banner {
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    border-bottom: 1px solid #e9ecef;
+}
+
+// Policy pages styling
+.s_text_block {
+    h3 {
+        color: #333;
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 8px;
+        margin-bottom: 16px;
+    }
+
+    .alert {
+        border-radius: 8px;
+    }
+
+    .card {
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+}
