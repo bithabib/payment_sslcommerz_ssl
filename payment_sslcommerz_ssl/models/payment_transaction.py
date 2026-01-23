@@ -36,7 +36,7 @@ class PaymentTransaction(models.Model):
 
         return super()._compute_reference(provider_code, prefix=prefix, separator=separator, **kwargs)
 
-    def _get_specific_processing_values(self, processing_values):
+    def _get_specific_rendering_values(self, processing_values):
         """ Override of `payment` to return SSLCommerz-specific processing values.
 
         Note: self.ensure_one() from `_get_processing_values`
@@ -47,7 +47,7 @@ class PaymentTransaction(models.Model):
         :rtype: dict
         """
         if self.provider_code != 'sslcommerz':
-            return super()._get_specific_processing_values(processing_values)
+            return super()._get_specific_rendering_values(processing_values)
 
         provider = self.provider_id
 

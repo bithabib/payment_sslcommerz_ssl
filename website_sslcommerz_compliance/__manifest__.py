@@ -7,6 +7,9 @@
     'sequence': 100,
     'summary': 'E-commerce compliance for SSLCommerz payment gateway requirements',
     'description': " ",
+    'author': 'School of Thoughts',
+    'maintainer': 'School of Thoughts',
+    'support': 'integration@sotltd.com',
     'depends': [
         'website_sale',
         'website_sale_stock',

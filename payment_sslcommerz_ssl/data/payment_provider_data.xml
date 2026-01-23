@@ -7,6 +7,11 @@
         <field name="code">sslcommerz</field>
         <field name="redirect_form_view_id" ref="redirect_form"/>
         <field name="image_128" type="base64" file="payment_sslcommerz_ssl/static/description/icon.png"/>
+        <field name="payment_method_ids"
+               eval="[Command.set([
+                         ref('payment_sslcommerz_ssl.payment_method_sslcommerz'),
+                     ])]"
+        />
     </record>
 
 </odoo>

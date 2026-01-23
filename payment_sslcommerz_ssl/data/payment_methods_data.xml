@@ -6,6 +6,7 @@
         <field name="code">sslcommerz</field>
         <field name="name">SSLCommerz</field>
         <field name="sequence">1000</field>
+        <field name="active">False</field>
         <field name="image" type="base64" file="payment_sslcommerz_ssl/static/description/icon.png"/>
         <field name="support_tokenization">False</field>
         <field name="support_express_checkout">False</field>
