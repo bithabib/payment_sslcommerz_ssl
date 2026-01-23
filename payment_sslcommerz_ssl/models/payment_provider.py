@@ -50,6 +50,11 @@ class PaymentProvider(models.Model):
         self.ensure_one()
         base_url = self.get_base_url()
         _logger.info("SSLCommerz callback URLs: %s", base_url)
+
+        # remove '/' from last if exists
+        if '/' == base_url[-1]:
+            base_url = base_url[:-1]
+
         return {
             "success_url": f"{base_url}/payment/sslcommerz/return",
             "fail_url": f"{base_url}/payment/sslcommerz/return",
