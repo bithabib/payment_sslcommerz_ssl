@@ -33,14 +33,11 @@
                             <div class="col-lg-4 pt24 pb24">
                                 <h5>Business Info</h5>
                                 <ul class="list-unstyled text-muted small">
-                                    <li t-if="request.website.compliance_trade_license and request.website.compliance_show_trade_license" class="mb-1">
-                                        <i class="fa fa-id-card me-1"/>Trade License: <t t-esc="request.website.compliance_trade_license"/>
+                                    <li class="mb-1">
+                                        <i class="fa fa-id-card me-1"/><strong>Trade License No:</strong> 1679/381
                                     </li>
-                                    <li t-if="request.website.compliance_tin_number and request.website.compliance_show_trade_license" class="mb-1">
-                                        <i class="fa fa-file-text me-1"/>TIN: <t t-esc="request.website.compliance_tin_number"/>
-                                    </li>
-                                    <li t-if="request.website.compliance_registered_address" class="mb-1">
-                                        <i class="fa fa-map-marker me-1"/><t t-esc="request.website.compliance_registered_address"/>
+                                    <li class="mb-1">
+                                        <i class="fa fa-map-marker me-1"/>House: 07, Road: 01, Block: A, Bosila, Mohammadpur, Dhaka, PO: 1207, Bangladesh
                                     </li>
                                     <li t-if="request.website.compliance_contact_email" class="mb-1">
                                         <i class="fa fa-envelope me-1"/><t t-esc="request.website.compliance_contact_email"/>

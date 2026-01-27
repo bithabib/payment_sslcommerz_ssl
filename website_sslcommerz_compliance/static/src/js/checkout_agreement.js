@@ -3,8 +3,9 @@
 /**
  * SSLCommerz Compliance - Checkout Terms Agreement
  *
- * This module ensures that the terms agreement checkbox is validated
- * before the customer can proceed with payment.
+ * Ensures the terms agreement checkbox is checked before the customer
+ * can proceed with payment. The checkbox is blank by default and
+ * the customer must check it to proceed.
  */
 
 import publicWidget from "@web/legacy/js/public/public_widget";
@@ -15,43 +16,46 @@ publicWidget.registry.ComplianceTermsAgreement = publicWidget.Widget.extend({
         'change #compliance_terms_checkbox': '_onCheckboxChange',
     },
 
-    /**
-     * @override
-     */
     start() {
         this._super(...arguments);
         this._updatePaymentButton();
+        // Watch for dynamically loaded payment buttons
+        this._observer = new MutationObserver(() => this._updatePaymentButton());
+        const paymentArea = document.querySelector('#payment_method') || document.body;
+        this._observer.observe(paymentArea, { childList: true, subtree: true });
         return Promise.resolve();
     },
 
-    /**
-     * Handle checkbox change event
-     * @private
-     */
+    destroy() {
+        if (this._observer) {
+            this._observer.disconnect();
+        }
+        const buttons = document.querySelectorAll('button[name="o_payment_submit_button"]');
+        buttons.forEach(btn => {
+            btn.classList.remove('disabled');
+            btn.removeAttribute('disabled');
+        });
+        this._super(...arguments);
+    },
+
     _onCheckboxChange() {
         this._updatePaymentButton();
     },
 
-    /**
-     * Enable/disable payment button based on checkbox state
-     * @private
-     */
     _updatePaymentButton() {
         const checkbox = this.el.querySelector('#compliance_terms_checkbox');
-        const paymentForm = document.querySelector('#o_payment_form');
+        if (!checkbox) return;
 
-        if (checkbox && paymentForm) {
-            const submitButtons = paymentForm.querySelectorAll('button[type="submit"], .o_payment_submit');
-            submitButtons.forEach(button => {
-                if (checkbox.checked) {
-                    button.classList.remove('disabled');
-                    button.removeAttribute('disabled');
-                } else {
-                    button.classList.add('disabled');
-                    button.setAttribute('disabled', 'disabled');
-                }
-            });
-        }
+        const buttons = document.querySelectorAll('button[name="o_payment_submit_button"]');
+        buttons.forEach(btn => {
+            if (checkbox.checked) {
+                btn.classList.remove('disabled');
+                btn.removeAttribute('disabled');
+            } else {
+                btn.classList.add('disabled');
+                btn.setAttribute('disabled', 'disabled');
+            }
+        });
     },
 });
 

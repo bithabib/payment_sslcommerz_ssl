@@ -293,6 +293,17 @@
                                 <h3 class="mt-4">Our Mission</h3>
                                 <p>We believe quality education should be accessible to everyone. Our mission is to provide affordable, high-quality exam preparation tools that help students achieve their target scores and pursue their academic goals abroad.</p>
 
+                                <h3 class="mt-4">Business Information</h3>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2"><i class="fa fa-building me-2"/><strong>Company:</strong> School of Thought</li>
+                                            <li class="mb-2"><i class="fa fa-id-card me-2"/><strong>Trade License No:</strong> 1679/381</li>
+                                            <li class="mb-2"><i class="fa fa-map-marker me-2"/><strong>Address:</strong> House: 07, Road: 01, Block: A, Bosila, Mohammadpur, Dhaka, PO: 1207, Bangladesh</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
                                 <h3 class="mt-4">Contact Us</h3>
                                 <p>Have questions? We'd love to hear from you! Visit our <a href="/contactus">Contact Us</a> page or reach out via WhatsApp for quick support.</p>
                             </div>

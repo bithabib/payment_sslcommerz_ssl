@@ -7,9 +7,6 @@
     'sequence': 100,
     'summary': 'E-commerce compliance for SSLCommerz payment gateway requirements',
     'description': " ",
-    'author': 'School of Thoughts',
-    'maintainer': 'School of Thoughts',
-    'support': 'integration@sotltd.com',
     'depends': [
         'website_sale',
         'website_sale_stock',
@@ -28,6 +25,9 @@
         'web.assets_frontend': [
             'website_sslcommerz_compliance/static/src/scss/compliance.scss',
             'website_sslcommerz_compliance/static/src/js/checkout_agreement.js',
+        ],
+        'web.assets_backend': [
+            'website_sslcommerz_compliance/static/src/js/website_builder_redirect_patch.js',
         ],
     },
     'installable': True,
